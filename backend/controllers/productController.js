@@ -25,7 +25,7 @@ async function listProducts() {
     categoryMap[product.category_id].products.push({
       id: product.id,
       name: product.name,
-      base_price: product.base_price,
+      base_price: parseFloat(product.base_price),
       image_url: product.image_url,
     });
   }
@@ -39,7 +39,7 @@ async function listProducts() {
     options[opt.option_type].push({
       id: opt.id,
       name: opt.name,
-      extra_price: opt.extra_price,
+      extra_price: parseFloat(opt.extra_price),
     });
   }
 

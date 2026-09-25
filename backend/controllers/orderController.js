@@ -48,19 +48,19 @@ async function createOrder(data) {
     }
 
     // คำนวณราคา: base_price + ขนาด + ท็อปปิง
-    let unitPrice = product.base_price;
+    let unitPrice = parseFloat(product.base_price);
 
     // บวกราคาขนาด
     const sizeOption = await ProductOption.findById(sizeId);
     if (sizeOption) {
-      unitPrice += sizeOption.extra_price;
+      unitPrice += parseFloat(sizeOption.extra_price);
     }
 
     // บวกราคาท็อปปิง (ถ้ามี)
     if (toppingIds && toppingIds.length > 0) {
       const toppings = await ProductOption.findByIds(toppingIds);
       for (const topping of toppings) {
-        unitPrice += topping.extra_price;
+        unitPrice += parseFloat(topping.extra_price);
       }
     }
 
@@ -94,25 +94,14 @@ async function createOrder(data) {
     + String(now.getDate()).padStart(2, "0");
   const orderNo = `POS-${dateStr}-${String(queueNo).padStart(4, "0")}`;
 
-  // --- บันทึกลง DB ---
-  const order = await Order.create({
+  // --- บันทึกลง DB ด้วย Transaction ---
+  const order = await Order.createWithItems({
     orderNo,
     queueNo,
     totalAmount,
     paymentMethod,
+    items: resolvedItems,
   });
-
-  // บันทึกรายการสินค้า
-  for (const item of resolvedItems) {
-    await Order.createItem({
-      orderId: order.id,
-      productId: item.productId,
-      quantity: item.quantity,
-      unitPrice: item.unitPrice,
-      subtotal: item.subtotal,
-      optionsJson: item.optionsJson,
-    });
-  }
 
   // --- FR-07: ส่งข้อมูลกลับ (หน้าจอบาริสต้าจะ poll จาก GET /api/orders/queue) ---
   return {

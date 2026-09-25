@@ -1,3 +1,5 @@
 node_modules/
 .env
 cafe_pos.db
+cafe_pos.db-shm
+cafe_pos.db-wal

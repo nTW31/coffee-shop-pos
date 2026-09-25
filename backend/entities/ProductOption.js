@@ -22,10 +22,10 @@ class ProductOption {
    */
   static async findByIds(ids) {
     if (!ids || ids.length === 0) return [];
-    const placeholders = ids.map(() => "?").join(",");
-    return db.all(
-      `SELECT * FROM product_options WHERE id IN (${placeholders})`,
-      ids,
+    // MySQL: ใช้ db.query() แทน db.all() เพราะ mysql2.execute() ไม่รองรับ array expansion
+    return db.query(
+      `SELECT * FROM product_options WHERE id IN (?)`,
+      [ids],
     );
   }
 }
