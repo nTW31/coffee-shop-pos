@@ -1,0 +1,16 @@
+{
+  "name": "coffee-shop-pos-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Coffee Shop POS — System Analysis & Design Course Project (BCM Architecture, React + Express + SQLite/MySQL)",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": ["pos", "coffee-shop", "react", "express", "bcm-architecture", "system-analysis-and-design"],
+  "author": "",
+  "license": "ISC"
+}

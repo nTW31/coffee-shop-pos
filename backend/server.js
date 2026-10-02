@@ -12,6 +12,8 @@ const app = express();
 // ---------------------------------------------------------------------------
 app.use(cors());                                           // อนุญาต cross-origin (Frontend แยก port)
 app.use(express.json());                                   // รับ JSON body
+const frontendDist = path.join(__dirname, "../frontend/dist");
+app.use(express.static(frontendDist));
 app.use(express.static(path.join(__dirname, "public")));   // Serve static files
 
 // ---------------------------------------------------------------------------
@@ -19,6 +21,15 @@ app.use(express.static(path.join(__dirname, "public")));   // Serve static files
 // ---------------------------------------------------------------------------
 app.use("/api", productRoutes);   // GET  /api/products
 app.use("/api", orderRoutes);     // POST /api/orders, GET /api/orders/queue, PATCH /api/orders/:id/status
+
+// SPA Fallback for React Frontend
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) return next();
+  const indexPath = path.join(frontendDist, "index.html");
+  res.sendFile(indexPath, (err) => {
+    if (err) next();
+  });
+});
 
 // ---------------------------------------------------------------------------
 // Start Server — setup DB ก่อนเปิดรับ request

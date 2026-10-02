@@ -162,4 +162,27 @@ async function updateStatus(orderId, newStatus) {
   return { status: 200, body: { id: orderId, status: newStatus } };
 }
 
-module.exports = { createOrder, getQueue, updateStatus };
+/**
+ * ยกเลิกออเดอร์ — ยกเลิกได้เฉพาะสถานะ pending หรือ cooking เท่านั้น
+ * ออเดอร์ที่ ready หรือ completed ไม่สามารถยกเลิกได้
+ */
+async function cancelOrder(orderId) {
+  const order = await Order.findById(orderId);
+  if (!order) {
+    return { status: 404, body: { error: `ไม่พบออเดอร์ id ${orderId}` } };
+  }
+
+  const cancellable = ["pending", "cooking"];
+  if (!cancellable.includes(order.status)) {
+    return {
+      status: 400,
+      body: { error: `ไม่สามารถยกเลิกออเดอร์ที่อยู่ในสถานะ "${order.status}" ได้` },
+    };
+  }
+
+  await Order.updateStatus(orderId, "cancelled");
+  return { status: 200, body: { id: orderId, status: "cancelled", message: "ยกเลิกออเดอร์เรียบร้อยแล้ว" } };
+}
+
+module.exports = { createOrder, getQueue, updateStatus, cancelOrder };
+

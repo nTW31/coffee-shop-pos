@@ -122,24 +122,52 @@ async function seedMockData() {
 
   // --- เมนู (12 รายการ) ---
   // กาแฟ (category_id = 1)
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [1, "เอสเปรสโซ่", 45]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [1, "อเมริกาโน่", 50]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [1, "ลาเต้", 60]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [1, "คาปูชิโน่", 60]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [1, "มอคค่า", 65]);
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [1, "เอสเพรสโซ (Espresso)", 45],
+  );
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [1, "อเมริกาโน (Americano)", 50],
+  );
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [1, "ลาเต้ (Latte)", 60],
+  );
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [1, "คาปูชิโน (Cappuccino)", 60],
+  );
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [1, "มอคค่า (Mocha)", 65],
+  );
 
   // ชา (category_id = 2)
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [2, "ชาเขียว", 50]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [2, "ชาไทย", 45]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [2, "ชามะลิ", 45]);
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [2, "ชาเขียวมัทฉะ (Matcha Latte)", 65],
+  );
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [2, "ชาไทยเย็น (Thai Milk Tea)", 50],
+  );
 
-  // ปั่น (category_id = 3)
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [3, "ฟราปเป้มอคค่า", 75]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [3, "สมูทตี้มะม่วง", 70]);
+  // ปั่น/สมูทตี้ (category_id = 3)
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [3, "สตรอว์เบอร์รีสมูทตี้ (Strawberry Smoothie)", 70],
+  );
 
   // เบเกอรี่ (category_id = 4)
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [4, "ครัวซองต์", 55]);
-  await run("INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)", [4, "เค้กช็อกโกแลต", 65]);
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [4, "ครัวซองต์เนยสด (Butter Croissant)", 55],
+  );
+  await run(
+    "INSERT INTO products (category_id, name, base_price) VALUES (?, ?, ?)",
+    [4, "บราวนี่ดาร์กช็อกโกแลต (Dark Choc Brownie)", 50],
+  );
 
   // --- ตัวเลือก (Product Options) ---
   // ขนาด (size)
@@ -148,11 +176,26 @@ async function seedMockData() {
   await run("INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)", ["size", "L", 20]);
 
   // ความหวาน (sweetness) — ไม่คิดเงินเพิ่ม
-  await run("INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)", ["sweetness", "หวาน 0%", 0]);
-  await run("INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)", ["sweetness", "หวาน 25%", 0]);
-  await run("INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)", ["sweetness", "หวาน 50%", 0]);
-  await run("INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)", ["sweetness", "หวาน 75%", 0]);
-  await run("INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)", ["sweetness", "หวาน 100%", 0]);
+  await run(
+    "INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)",
+    ["sweetness", "หวาน 0% (ไม่หวาน)", 0],
+  );
+  await run(
+    "INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)",
+    ["sweetness", "หวาน 25% (หวานน้อย)", 0],
+  );
+  await run(
+    "INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)",
+    ["sweetness", "หวาน 50% (หวานปานกลาง)", 0],
+  );
+  await run(
+    "INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)",
+    ["sweetness", "หวาน 75% (หวานปกติ)", 0],
+  );
+  await run(
+    "INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)",
+    ["sweetness", "หวาน 100% (หวานมาก)", 0],
+  );
 
   // ท็อปปิง (topping)
   await run("INSERT INTO product_options (option_type, name, extra_price) VALUES (?, ?, ?)", ["topping", "ไข่มุก", 15]);

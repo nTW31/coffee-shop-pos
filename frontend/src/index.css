@@ -1,0 +1,139 @@
+/* ==========================================================================
+   Coffee Shop POS — Design System & Global Styles
+   Aesthetic: Warm Artisanal Coffee & Modern Minimalist POS
+   ========================================================================== */
+
+:root {
+  /* Brand Palette: Warm Artisanal Cafe */
+  --color-primary-900: #1b0f0a; /* Deepest Espresso */
+  --color-primary-800: #2a1810; /* Dark Roast */
+  --color-primary-700: #3e2417; /* Fresh Brew */
+  --color-primary-600: #573322; /* Medium Roast */
+  --color-primary-500: #7b4b32; /* Rich Amber Roast */
+
+  /* Accent Colors */
+  --color-accent-amber: #d97706; /* Caramel Gold */
+  --color-accent-light: #f59e0b; /* Golden Cream */
+  --color-accent-hover: #b45309; /* Dark Amber */
+  --color-cream-100: #fdfbf7;   /* Cream Milk Background */
+  --color-cream-200: #f5efe6;   /* Warm Surface */
+  --color-cream-300: #e8ded2;   /* Subtle Border */
+  --color-cream-400: #d6c6b4;   /* Divider */
+
+  /* Neutral & Dark */
+  --color-text-main: #1f1a17;   /* Charcoal Warm */
+  --color-text-muted: #6b635b;  /* Soft Warm Gray */
+  --color-text-light: #9c9288;  /* Subtle Details */
+  --color-surface-white: #ffffff;
+  
+  /* Status Colors */
+  --status-pending-bg: #fef3c7;
+  --status-pending-text: #b45309;
+  --status-pending-border: #fcd34d;
+  
+  --status-cooking-bg: #ffedd5;
+  --status-cooking-text: #c2410c;
+  --status-cooking-border: #fdba74;
+
+  --status-ready-bg: #d1fae5;
+  --status-ready-text: #047857;
+  --status-ready-border: #6ee7b7;
+
+  --status-completed-bg: #f3f4f6;
+  --status-completed-text: #4b5563;
+  --status-completed-border: #e5e7eb;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(42, 24, 16, 0.05);
+  --shadow-md: 0 4px 12px rgba(42, 24, 16, 0.08);
+  --shadow-lg: 0 10px 25px rgba(42, 24, 16, 0.12);
+  --shadow-xl: 0 20px 40px rgba(42, 24, 16, 0.18);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-family: 'Prompt', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'Inter', monospace;
+  
+  /* Layout Dimensions */
+  --navbar-height: 72px;
+  --cart-width: 400px;
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-cream-100);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+input, select {
+  font-family: inherit;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(217, 119, 6, 0); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-cream-300);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-500);
+}

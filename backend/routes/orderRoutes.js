@@ -56,4 +56,19 @@ router.patch("/orders/:id/status", async (req, res) => {
   }
 });
 
+/**
+ * DELETE /api/orders/:id
+ * ยกเลิกออเดอร์ (ได้เฉพาะ pending / cooking)
+ */
+router.delete("/orders/:id", async (req, res) => {
+  try {
+    const orderId = parseInt(req.params.id, 10);
+    const result = await orderController.cancelOrder(orderId);
+    res.status(result.status).json(result.body);
+  } catch (err) {
+    console.error("DELETE /api/orders/:id error:", err);
+    res.status(500).json({ error: "เกิดข้อผิดพลาดภายในระบบ" });
+  }
+});
+
 module.exports = router;

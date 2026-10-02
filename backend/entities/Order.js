@@ -54,7 +54,7 @@ class Order {
     const orders = await db.all(`
       SELECT id, order_no, queue_no, total_amount, payment_method, status, created_at
       FROM orders
-      WHERE status IN ('pending', 'cooking')
+      WHERE status IN ('pending', 'cooking', 'ready')
       ORDER BY queue_no ASC
     `);
 
